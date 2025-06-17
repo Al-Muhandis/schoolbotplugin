@@ -90,7 +90,7 @@ type
     function CreateInKbEditUser(aUserID: Int64): TInlineKeyboard;
     function CreateInKbOpenDialog(aSessionID: Integer): TInlineKeyboard;
     function CreateReplyKeyboardStart: TReplyMarkup;
-    function CreateReplyKeyboardDialogSession: TKeybordButtonArray;
+    function CreateReplyKeyboardDialogSession: TKeyboardButtonArray;
     procedure DataFieldSet(aEntityType: TEntityType; aID: Int64; const aField: String;
       const aValue: String; aMessage: TTelegramMessageObj);
     procedure DataFieldSet(const aData: String; aMessage: TTelegramMessageObj);
@@ -242,7 +242,7 @@ resourcestring
   s_NewCourse='New course';
   s_MyCourses='My courses';
   s_Back='Back';
-  s_ConfLang='Interface Language';    // Выбрать язык бота';
+  s_ConfLang='Interface Language';    // Выбрать язык бота
   s_SettingsText='Here you can customize';   //Здесь Вы можете настроить словари под себя.'+LineEnding+LineEnding+
   s_SettingsLang='Interface Language:'; //Выберите язык бота:';
   s_StartText='Start text';
@@ -2009,7 +2009,7 @@ var
 begin
   Result:=TReplyMarkup.Create;
   Result.ResizeKeyboard:=True;
-  Result.ReplyKeyboardMarkup:=TKeybordButtonArray.Create;
+  Result.ReplyKeyboardMarkup:=TKeyboardButtonArray.Create;
   if AllCanCreateCourse or not Bot.CurrentIsSimpleUser then
     aMenuItem:=s_CourseCreation
   else
@@ -2021,9 +2021,9 @@ begin
   Result.ReplyKeyboardMarkup.Add.AddButtons([s_Help, s_Storage, s_Settings]);
 end;
 
-function TSchoolBotPlugin.CreateReplyKeyboardDialogSession: TKeybordButtonArray;
+function TSchoolBotPlugin.CreateReplyKeyboardDialogSession: TKeyboardButtonArray;
 begin
-  Result:=TKeybordButtonArray.Create;
+  Result:=TKeyboardButtonArray.Create;
   Result.Add.AddButtons([s_DialogExit]);
 end;
 
@@ -2132,7 +2132,6 @@ function TSchoolBotPlugin.CheckChannelMember(aChat: Int64; aUser: Int64
 var
   aChatMember: TTelegramChatMember;
 begin
-  Exit(True);
   Bot.getChatMember(aChat, aUser, aChatMember);
   Result:=aChatMember.is_member;
   if not Result then
